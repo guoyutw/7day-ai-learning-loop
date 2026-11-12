@@ -1,6 +1,8 @@
 # 研究分工：跨 AI 工具可複製提示詞
 
-這些是**有條件才使用**的子任務。主導者仍需先設定研究問題與來源停止條件，並記錄原始來源。工具不能存取或使用者沒有帳號時，請用人工取得材料，不假裝自動執行。
+這些是**有條件才使用**的子任務。主導者仍需先設定研究問題與來源停止條件，並記錄原始來源。工具不能存取或使用者沒有帳號時，請用人工取得材料，不假裝自動執行。常見流程需要使用者跨好幾次對話手動貼來源與回報；這段研究時間不計入七天實作。
+
+各子任務一律採用 [SOURCE_LOG_TEMPLATE.md](SOURCE_LOG_TEMPLATE.md) 的讀取狀態：`VERIFIED_FULL / REPORTED_FULL / PARTIAL / LINK_ONLY / FAILED / DUPLICATE / UNKNOWN`；影片另外註明 `VISUAL_UNCHECKED`。第一次研究判定 NEED_SOURCES 且使用者同意時，最多再補搜 2 輪、每輪最多新增 3 個針對缺口的來源；仍不足就縮小題目或 STOP。QUICK_MODE 只在使用者明確要求時啟用，最多 3 個來源、仍需簡版 SOURCE_REVIEW 和 PLAN_REVIEW。
 
 ## 1｜給能搜尋網頁、YouTube 的研究 AI
 
@@ -8,7 +10,7 @@
 研究主題：【主題】
 學習者的實際目標：【一件想做的事情】
 現有程度／時間限制：【已知填寫，未知填 UNKNOWN】
-本輪範圍：【最多 6–12 個核心來源；若已有來源則只補缺口】
+本輪範圍：【首次一般模式最多 6–12 個核心來源；QUICK_MODE 最多 3 個；補搜須經使用者同意，最多 2 輪、每輪最多新增 3 個】
 
 請先將主題拆成最多五個可回答的研究問題，再尋找對應的「可取得原文」來源：
 A. 完整長影片：優先實務教學、現場演示、完整工作坊／專訪，適合時先找 30 分鐘以上；但不硬性限定片長，不追求數量。
@@ -73,8 +75,8 @@ D. 在本地語言之外，必要時補英文、日文或其他與該主題相�
 【在此貼上來源清單，附 ID、標題、URL；AI 二次報告另附全文或檔案】
 
 逐個匯入，原始來源與 AI 摘要要分成不同項。對每筆回報：
-ID／標題／原始網址／實際取得內容／FULL_TEXT 或 PARTIAL 或 FAILED 或 DUPLICATE 或 UNKNOWN；
-對 YouTube 註明字幕是否可用、視覺資訊是否缺失；對網站註明是否只有首頁／是否無法讀子頁。
+ID／標題／原始網址／實際取得內容／VERIFIED_FULL 或 REPORTED_FULL 或 PARTIAL 或 LINK_ONLY 或 FAILED 或 DUPLICATE 或 UNKNOWN；
+對 YouTube 註明字幕是否可用、視覺資訊是否缺失（未實際看畫面註明 VISUAL_UNCHECKED）；對網站註明是否只有首頁／是否無法讀子頁。本輪實際核對完整內容才標 VERIFIED_FULL；只是其他 AI 回報可取得全文而未獨立核對，標 REPORTED_FULL；只有標題／網址／搜尋摘要不能標全文。
 
 匯入完成後，請只回報來源驗收表、失敗清單與筆記本連結。不要開始比較來源或產生課程。
 無法實際建立／匯入時要明說，不得假稱成功。
@@ -104,4 +106,4 @@ E. 可否進入設計：READY / PARTIAL_READY / NEED_SOURCES / STOP，及理由
 
 ## 狀態移交的最低欄位
 
-每次換工具保留：主題、研究問題、來源 ID 與 URL、各自的真實讀取狀態、最新 VERIFIED/UNKNOWN、重複與反例、已完成的關卡（或 PENDING）、目前唯一下一步。參見 [HANDOFF.md](HANDOFF.md)。
+每次換工具保留：主題、研究問題、來源 ID 與 URL、實際讀取狀態（使用完整七種標籤）、本輪補搜次數／QUICK_MODE、影片 VISUAL_UNCHECKED、重複與反例、已完成的 SOURCE_REVIEW 與 PLAN_REVIEW（或 PENDING）、目前唯一下一步。參見 [HANDOFF.md](HANDOFF.md)。
