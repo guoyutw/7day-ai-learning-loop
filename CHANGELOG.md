@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## Unreleased — Draft：單一入口、按需載入、三條路徑走查
+
+- **目的**：讓第一次進來的人迅速知道「免費教材 → NotebookLM 統整 → 七天實作」，單一主動作是開啟 `PROMPT.md`。
+- **去重**：保留 `README.md`（給人）、`PROMPT.md`（唯一 AI 執行指令）、`METHOD.md`（研究及教學細節）、`HANDOFF.md`（跨對話狀態）；移除重複的 `RESEARCH_METHOD.md`、`RESEARCH_PROMPTS.md`、`SOURCE_LOG_TEMPLATE.md`、`DAILY_REVIEW.md`。研究背景、公開來源、版本紀錄與授權保留。
+- **行為不變**：保留 STANDARD／QUICK_MODE、NotebookLM-first／需明確選擇的 DIRECT_SYNTHESIS、來源級別與畫面限制、SOURCE_PACKAGE_READY／INGEST_REVIEW／SYNTHESIS_REPORT、SOURCE_REVIEW／PLAN_REVIEW 人工確認、七天實作及中斷接續。
+- **進階內容按需**：初次只複製 `PROMPT.md`；跨工具接力指示在當下產出；研究／課程細節需要時才看 `METHOD.md`，換對話時才用 `HANDOFF.md`。
+- **驗證界線**：Draft PR 的文件、連結及三條使用路徑走查，不能替代真人完整七天成效驗證。
+
 ## 2026-11-12 — v0.2.3 / beginner-first entry and three-axis evidence clarity (untested)
 
 ### v0.2.3 follow-up｜README 不再嵌套另一份 Agent Prompt
