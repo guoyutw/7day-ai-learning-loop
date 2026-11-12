@@ -1,44 +1,27 @@
-# 跨 AI／跨對話的研究與七天課程接續模板
+# 中斷接續｜一份狀態就夠
 
-這套流程常跨多個工具：一個 AI 找文章和長影片、Grok 查 X、Meta AI 查 Threads、NotebookLM 匯入及比較，最後回到教練對話帶練。**每次交接須分清楚角色、來源狀態、關卡與未知**。AI 不一定能讀到上個工具的訊息，也不應假裝有跨平台記憶。
-
-以下整段可複製到下一個 AI 對話：
+每次結束研究階段或一天的練習，請 AI 依下表**只填實際已完成**的資訊，存到自己的筆記。新對話先貼 [PROMPT.md](PROMPT.md) 的完整提示詞，**再貼這份狀態**；不要重頭搜尋，也不要假稱讀到其他對話。
 
 ```text
-請接續 Research-first 七天 AI 陪跑。以下是上一輪人工保留的摘要，若有衝突或缺證據，先回報，不自行補造。
-
-研究主題與學習者真正的目標：
-現有程度、時間、工具、語言與限制：
-目前階段（R0 定義 / R1 搜尋與來源包 / SOURCE_PACKAGE_READY / R2 INGEST_REVIEW / 等待 SYNTHESIS_REPORT / SOURCE_REVIEW / R3 計畫 / PLAN_REVIEW / R4 Day 1–7 / 結案）：
-模式（STANDARD／QUICK_MODE；QUICK_MODE 必須是學習者明確要求且最多 3 個來源）：
-研究路線（預設 NOTEBOOKLM_FIRST；DIRECT_SYNTHESIS 須使用者明確選擇與記錄）：
-已使用 NEED_SOURCES 補搜輪次（0／1／2，需經學習者同意，最多 2 輪、每輪最多新增 3 個）：
-研究問題與本輪停止條件：
-已找到的來源（ID / 標題 / 原始 URL / 類型 / VERIFIED_FULL、REPORTED_FULL、PARTIAL、LINK_ONLY、FAILED、DUPLICATE、UNKNOWN 之一；本輪是否實際核對、核對者及日期）：
-影片畫面是否檢查（沒看就標 VISUAL_UNCHECKED；完整字幕不等於看過畫面）：
-主要研究結果與反例（每項附可追溯來源）：
-哪些是原始來源、專家方法、本人自述、其他 AI 的二次報告：
-SOURCE_PACKAGE_READY 是否完成（YES／NO）？來源包與可複製匯入 Prompt 位置：
-INGEST_RECEIPT 是否已由 NotebookLM／工具實際匯入並讀回？筆記本名稱或連結、逐筆成功／部分／失敗／未知：
-INGEST_REVIEW 是否完成？誰回報、哪天、是否獨立讀回／只是平台回報：
-SYNTHESIS_REPORT 是否已從 NotebookLM 帶回？是否有來源 ID、原始 URL 或可查位置：
-若使用 DIRECT_SYNTHESIS，誰在何時明確選擇？主 AI 實際讀到什麼：
-SOURCE_REVIEW 是否經使用者確認（YES / NO / PENDING）：
-七天計畫是否已設計？版本／預定成果：
-PLAN_REVIEW 是否經使用者確認（YES / NO / PENDING）：
-現在第幾天：
-Day 1 基線與已完成的練習成果：
-AI 修改或代做的部分：
-目前缺少的證據、外部結果／敏感資訊限制：
-下次唯一要做的事：
-
-請先核對狀態與當前可讀來源。預設 NOTEBOOKLM_FIRST，沒有匯入收據與跨來源報告就不能直接提交正式 SOURCE_REVIEW；遇到來源包時先停下交給我操作。只有我明確選擇 DIRECT_SYNTHESIS 才能跳過 NotebookLM；QUICK_MODE 只是縮小研究、不能略過兩道正式確認。沒有必要的確認就停在正確關卡，不跳到 Day 1 或宣稱結案。
+【七天學習交接】
+主題／七天作品：
+目前程度、每日時間、重要限制：
+目前階段：SOURCE_PACKAGE_READY／INGEST_REVIEW／等待 SYNTHESIS_REPORT／SOURCE_REVIEW／PLAN_REVIEW／Day __
+模式：STANDARD／QUICK_MODE
+路線：NOTEBOOKLM_FIRST／DIRECT_SYNTHESIS（若改用，附本人明確選擇）
+來源清單：Sxx + URL 或私人文件位置；讀取缺口與 UNKNOWN：
+NotebookLM 匯入紀錄：已成功／失敗／未知，以及收據位置（無則 PENDING）：
+跨來源研究報告位置（無則 PENDING）：
+SOURCE_REVIEW 本人確認：YES／NO／PENDING
+PLAN_REVIEW 本人確認：YES／NO／PENDING
+已用 NEED_SOURCES 補搜輪次：0／1／2
+目前 Day（尚未開始寫 NOT STARTED）：
+本人原始作品／Day 1 基線位置：
+今天實際做了什麼、AI 幫了什麼、本人重做了什麼：
+實際結果、成本、反例及未證明事項：
+唯一下一步：
 ```
 
-**保存位置**：可放自己的私有筆記、文件、NotebookLM 摘要或私人聊天。公開 GitHub Issue 不應放私人逐字稿、客戶或家庭資料、帳號識別碼、敏感結果。
+**接續檢查**：比對已保存的收據、學習者批准與當前階段；只有必要證據完整才前進。沒有收據或批准就保持 PENDING，不因 AI 生成的摘要自動補齊。若只是切換 AI，先從「唯一下一步」接續，除非使用者更換目標或來源證據已過期，不重跑已驗證工作。
 
-### 最簡版（每日實作期間）
-
-`主題｜目前 Day｜七天目標｜已做成果｜AI／本人分工｜卡點與 UNKNOWN｜明天單一任務`。
-
-若使用者只是換對話，不必重新搜來源；先根據上次確認的版本接續，只有證據過期或目標改變才重新走研究關卡。
+每日回顧最少記錄**本人第一次做的版本、AI 回饋、本人重做版、下一步**；Day 7 再對照 Day 1 的相近任務。請把資料放私人空間，避免把客戶訊息、個人敏感內容或整份第三方付費教材貼到公開 Issue。
