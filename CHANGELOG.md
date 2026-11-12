@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 2026-11-12 — v0.2.3 / beginner-first entry and three-axis evidence clarity (untested)
+
+**緣由**：使用者要讓沒有原專案背景的人直接拿公開 Repo 使用；v0.2.2 雖能停在 SOURCE_PACKAGE_READY，README 首屏仍用「AI 先排過課」的假設情境開場、Prompt 很長，且來源讀取標記、方法的可靠性與學習投入容易混成一種判斷。
+
+**研究參考（閱讀原始 Repo README 及相關指南，借鏡原理，不複製其條目／證據評級）**：
+- [byoungd/up](https://github.com/byoungd/up)：以目前問題和最小可執行動作作為入口；閱讀指南及 `learning-state` 最小模板讓讀者知道第一步留下什麼、下一步在哪裡恢復。
+- [eternity4719/HowToLiveBetter](https://github.com/eternity4719/HowToLiveBetter)：把資料可核對性、行動成本和預期好處分開，不把證據等級當作必然效果或個人適用性。
+
+**修訂**：
+1. `README.md` 改用真實前提「免費教材散落不同平台和語言」，提供可直接複製的短啟動 Prompt、收到各階段結果時的下一動作，以及常見卡住時的恢復語句；完整主 Prompt 仍保留作為無法連 GitHub 的替代方案。
+2. `PROMPT.md`、`RESEARCH_METHOD.md`、`SOURCE_LOG_TEMPLATE.md` 在**既有** R2／SOURCE_REVIEW 內區分「來源實際讀到多少」、「方法主張有多少證據及適用性」、「練習要投入多少時間／錢／工具、七天可以觀察什麼」，不引入新關卡，也不照搬外部 A/B/C 量尺。
+3. 明確區分「原始資料無法開啟」的 `FAILED` 與「NotebookLM 導入失敗」的 `INGEST_RECEIPT`；修訂 `METHOD.md` 版本標示。
+
+**不變**：預設 STANDARD + NOTEBOOKLM_FIRST、SOURCE_PACKAGE_READY、INGEST_REVIEW、SYNTHESIS_REPORT、SOURCE_REVIEW、PLAN_REVIEW、Day 1–7；QUICK_MODE 與 DIRECT_SYNTHESIS 仍需使用者明確選擇，人工批准與來源誠實邊界不變。
+
+**驗證限制**：這次是文件改版和靜態讀回；沒有證明跨 AI 上手成功率或七天學習成效提高。公開版本可以邀請真人試用，但不應宣稱已驗證有效。
+
 ## 2026-11-12 — v0.2.2 / NotebookLM-first research handoff (untested)
 
 **原因**：一次「30 秒料理短影片」測試在 v0.2.1 成功停在 SOURCE_REVIEW，卻在沒有 NotebookLM 匯入與跨來源統整的情況下，就自行完成來源比較。這符合當時主 Prompt 的「若想用 NotebookLM」文字，但未保留原本「先匯入、逐筆驗收，再整合研究」的核心方法。該次測試是使用者提供的 AI 輸出，不代表已驗證學習效果。
