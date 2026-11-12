@@ -10,6 +10,7 @@
 - 搜尋語言與平台：
 - 搜尋日期：
 - 研究模式（STANDARD / QUICK_MODE，需使用者明確提出 QUICK_MODE）：
+- 研究路線（預設 NOTEBOOKLM_FIRST／使用者明確選擇 DIRECT_SYNTHESIS）：
 - 本輪最多新增幾個來源／何時停止（一般首次最多 6–12，QUICK_MODE 最多 3）：
 - NEED_SOURCES 已使用的補搜輪次（0／1／2，最多 2 輪、每輪最多 3 個新來源）：
 - 收集者（本人／AI 工具／他人）：
@@ -35,11 +36,33 @@
 
 來源類型：原始作品／本人自述／第三方報導／官方文件／研究論文／專家方法／AI 二次整理／學習者實作證據。類型不是全域信用分數，須依主張判定適用性。
 
-## 來源去重與導入 NotebookLM
+## SOURCE_PACKAGE_READY｜待匯入來源包
 
-| ID | NotebookLM 來源名稱 | 對應原始 URL | 匯入狀態 | 缺少的圖片／字幕／子頁 | 是否重複證據 |
+- 來源包完成時間：
+- 選定來源清單及完整原始 URL（不能只有標題或 AI 內部引用編號）：
+- 重複／無法取得／影片 VISUAL_UNCHECKED：
+- 可直接複製的 NotebookLM 匯入提示詞位置：
+- 交接狀態（PENDING / HANDOFF_READY / DIRECT_SYNTHESIS_CHOSEN）：
+
+## INGEST_RECEIPT｜NotebookLM 匯入與核對
+
+**注意**：下面是筆記本「平台匯入狀態」，與上面的原始來源「讀取狀態」不同。筆記本接受 URL，不代表已核對全文；NotebookLM 讀到字幕，不代表看過影片畫面。
+
+| ID | 對應原始 URL | NotebookLM 來源名稱 | 平台匯入（成功／部分／失敗／未知） | 實際可見內容／核對方式 | 缺少的字幕／畫面／子頁 |
 |---|---|---|---|---|---|
 | S01 | | | UNKNOWN | | |
+
+## INGEST_REVIEW → SYNTHESIS_REPORT
+
+- 原來源數：
+- 匯入成功／部分／失敗／未知的來源數：
+- 筆記本中的獨立來源數（同一作品不同形式去重）：
+- 仍未確認的字幕、畫面、子頁與全文：
+- INGEST_REVIEW 由誰何時做、憑什麼核對：
+- **完整 NotebookLM 跨來源統整提示詞是否已交付**：
+- SYNTHESIS_REPORT 是否已由筆記本實際生成並帶回（YES / NO / UNKNOWN）：
+- SYNTHESIS_REPORT 定位及可回查來源／引用：
+- **若採 DIRECT_SYNTHESIS**：使用者明確選擇的紀錄、NotebookLM 未使用、主 AI 實際可讀來源及限制：
 
 ## 研究主張對照
 
@@ -56,6 +79,8 @@
 - `UNKNOWN`：沒有足夠資料
 
 ## SOURCE_REVIEW 結案
+
+此關卡只有在 NOTEBOOKLM_FIRST 的 `INGEST_RECEIPT`、`INGEST_REVIEW`、`SYNTHESIS_REPORT` 已完成、或使用者明確選擇 DIRECT_SYNTHESIS 並如實記錄後，才能提交。R1 的來源包不是 SOURCE_REVIEW。
 
 - 可用獨立來源數（同一講座的文字與影片算一個觀點）：
 - 可用技能示範／真實案例：
