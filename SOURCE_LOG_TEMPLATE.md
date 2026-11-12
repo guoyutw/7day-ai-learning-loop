@@ -91,3 +91,4 @@
 - 建議狀態：READY / PARTIAL_READY / NEED_SOURCES / STOP
 - **學習者決定**（未回覆先留 PENDING）：
 - 允許進行七天課程設計了嗎？（YES / NO / PENDING）：
+- 下一關 PLAN_REVIEW（課程設計完成後，由學習者確認；目前是否 PENDING）：
