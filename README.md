@@ -1,92 +1,43 @@
-# 網路上已經有免費教材，讓 AI 幫你找到、整理，再陪你練七天
+# 用免費教材，做一套自己的 7 天 AI 學習課
 
-### 7-Day AI Learning Loop · Research-first
+網路上有完整的公開課、YouTube 長影片和專家文章，只是散落在不同語言與平台。這套方法讓 AI 先找資料、交給 NotebookLM 比較，再陪你練七天。
 
-> **v0.2.3｜公開試用，學習成效尚未驗證。** 把散落在不同語言、YouTube、專家文章與公開教材的知識，整理成屬於你的七天實作課程。不保證七天精通，也不代替專業資格或判斷。
+**[開始：複製啟動提示詞 →](PROMPT.md)**
 
-## 從這裡開始
+填入想學的主題、目前程度和每天可用時間，將完整提示詞貼到有搜尋能力的 AI。**不用寫程式，也不用先讀其他文件。**
 
-**開啟 [PROMPT.md｜完整啟動提示詞](PROMPT.md)**
+<details>
+<summary>第一次使用，接下來會發生什麼？</summary>
 
-1. 將其中「學習主題」填成你想學的事，例如「用手機剪一支 30 秒料理影片」。
-2. 其他欄位知道就填，不知道可以留白。把 `PROMPT.md` 裡的**完整提示詞**複製到 ChatGPT、Gemini、Claude 等有搜尋能力的 AI。
-3. AI 會先找免費教材，產生可匯入 NotebookLM 的來源包，**停在 `SOURCE_PACKAGE_READY`**；收到後再依下表進行下一步。
+1. AI 先提供帶原始網址的教材清單和 NotebookLM 匯入指示，**停下來等你**。
+2. 你將選好的免費來源匯入 [NotebookLM](https://notebooklm.google.com/)，把匯入結果帶回原 AI；它再給你跨來源比較指示。
+3. 你把 NotebookLM 的整理結果帶回 AI，確認研究方向和七天計畫之後，才開始 Day 1。
 
-不用會寫程式，也不用事先讀完所有研究文件。若某個 AI 無法打開 GitHub，**直接貼上 `PROMPT.md` 的完整內容**，比請它憑網址猜測規則更可靠。
+這是**跨工具、部分需要手動複製**的流程，不是全自動服務。研究花的時間不算在七天練習內。沒有 NotebookLM 時，可要求 AI 提供替代路線，**由你決定是否改用**。
 
-**文件分工**：本 `README.md` 是給讀者的介紹與使用導航，不是第二份 AI 指令；`PROMPT.md` 才是唯一的完整啟動提示詞。研究細節與後續接力提示詞則放在各自的文件中。
+</details>
 
-## AI 第一次回覆後，你要做什麼？
+<details>
+<summary>中斷了、AI 跳步了，怎麼辦？</summary>
 
-| 收到什麼 | 你要做的事 |
-|---|---|
-| **SOURCE_PACKAGE_READY**：來源網址清單、讀取限制、匯入提示詞 | 複製它給 Gemini；如果沒有直接匯入權限，就在 [NotebookLM](https://notebooklm.google.com/) 自己建立筆記本並匯入。**不用先看完每份教材。** |
-| **INGEST_RECEIPT**：哪些材料真的匯入成功、哪些失敗 | 貼回原本的 AI 對話；它會核對並產生下一段 NotebookLM 統整提示詞。 |
-| **SYNTHESIS_REPORT**：NotebookLM 比較教材的共通方法、反例與缺口 | 貼回原本 AI；它才會交正式 **SOURCE_REVIEW**，請你決定資料夠不夠。 |
-| **PLAN_REVIEW**：七天課程草案 | 確認時間、難度與成果標準後才開始 Day 1。 |
+- **AI 直接排課**：請它回到 `SOURCE_PACKAGE_READY`，先交教材來源與 NotebookLM 匯入指示。
+- **換 AI／換對話**：先貼 [PROMPT.md](PROMPT.md) 的完整指令，再貼上依 [HANDOFF.md](HANDOFF.md) 保存的最新狀態，從尚未完成的步驟繼續。
+- **NotebookLM 匯入失敗**：告訴原 AI 哪些來源失敗；不代表原文章一定無法讀取。
+- **時間不足**：可明確要求 `QUICK_MODE`（最多 3 個來源）；其他確認步驟不會省略。
 
-每次只操作目前這一步，不必預先理解所有英文標籤。**研究可能要花數次對話，七天是後面的實作時間，不包含找資料。** 這是跨工具、部分需要手動複製的流程，並不是自動操作所有平台的服務。
+</details>
 
-**如果卡住：**
-- AI 直接產生七天課表：回覆「請回到 `SOURCE_PACKAGE_READY`，先給我來源包與 NotebookLM 匯入提示詞」。
-- Gemini 沒有 NotebookLM 操作權限：自己將指定來源加進 NotebookLM，記下成功／失敗，再貼回原 AI；不能讓 AI 假稱已匯入。
-- 不想使用 NotebookLM：可以明確對主 AI 說「我選擇 `DIRECT_SYNTHESIS`」，它才會直接統整**實際讀過**的來源；兩次正式確認仍保留。
-- 研究時間或精力有限：可明確要求 `QUICK_MODE`，來源縮到最多 3 個，但仍保留 NotebookLM 接力（除非另選 `DIRECT_SYNTHESIS`）、SOURCE_REVIEW 與 PLAN_REVIEW。
+<details>
+<summary>方法細節與公開紀錄</summary>
 
-## 這套方法在做什麼？
+- [PROMPT.md](PROMPT.md)：唯一完整 AI 啟動指令，含停止與人工確認關卡。
+- [METHOD.md](METHOD.md)：研究證據、NotebookLM 接力、七天練習與驗收（按需閱讀）。
+- [HANDOFF.md](HANDOFF.md)：跨對話接續與每日紀錄（按需使用）。
+- [ORIGIN.md](ORIGIN.md)、[SOURCES.md](SOURCES.md)：方法起源與公開參考資料。
+- [CHANGELOG.md](CHANGELOG.md)、[LICENSE](LICENSE)：改版紀錄與授權。
 
-不是把 AI 想出來的七堂課直接當教材。網路上已有完整工作坊、公開長影片、作者的實際方法與免費教學文章，卻可能散落在不同國家和平台。
+</details>
 
-研究要先找出值得讀的資料，確認真正取得了什麼，再利用 NotebookLM 比較，而不是把「找到連結」當成「看完內容」。**最後讓 AI 把有限且可追溯的資料轉成七天內可以做、可以提交作品、可以接受回饋的練習。**
+**公開試用，尚未驗證七天學習成效。** 免費教材不等於內容都正確；AI 讀到文章不等於方法有效，也不代表七天能學會。請勿上傳私人資料或未經授權的第三方教材。醫療、法律、財務與危險操作不以這套練習取代專業判斷。
 
-原本的研究題目是「閒人出租 × 個人品牌」：從台灣 Threads、日本經營者訪談、英文工作坊蒐集候選資料，請 Meta AI／Grok 協助查找難以直接存取的貼文，再經 Gemini／NotebookLM 研究及三輪課程設計審查。那是方法的起源，**不代表已完成七天試教或證明學員進步**。詳見 [ORIGIN.md](ORIGIN.md)。
-
-## 研究看三件不同的事
-
-| 判斷 | 問什麼 | 例子 |
-|---|---|---|
-| **讀取狀態** | AI 真的取得了多少來源內容？ | 文章讀完可標 `VERIFIED_FULL`；只有連結不能。 |
-| **方法依據** | 內容能支持什麼主張？ | 作者提出的寫作技巧是**待驗證的方法**，不是「七天保證學會」。 |
-| **投入與成果** | 你要花多少時間／工具？七天能觀察什麼？ | 每次練 20 分鐘，提交一版作品；是否改善，須和本人起點比較。 |
-
-這三件事互不替代：**讀過完整文章 ≠ 方法有效；證據充分 ≠ 這個人值得投入所有時間。** 我們不照搬外部 Repo 的 A/B/C 證據分級或 CP 值公式，而是讓每項主要練習說清楚來源、適用條件、投入與可觀察結果。
-
-## 流程與限制
-
-```text
-R0 定義想學的事
- → R1 跨語言找免費教材 → SOURCE_PACKAGE_READY（停下）
- → NotebookLM 匯入 → INGEST_RECEIPT
- → 主 AI 做 INGEST_REVIEW（停下，給統整提示詞）
- → NotebookLM 做 SYNTHESIS_REPORT
- → 主 AI 做 SOURCE_REVIEW（等你確認）
- → R3 設計七天 → PLAN_REVIEW（等你確認）
- → R4 Day 1–7：自己練習、回饋、重做、前後比較
-```
-
-- **來源選擇**：STANDARD 首輪最多 6–12 個互補來源，不為湊數；QUICK_MODE 要明確要求，最多 3 個。NEED_SOURCES 需同意，最多再補搜兩輪，每輪最多新增 3 筆。
-- **NotebookLM-first 是預設**：沒有匯入收據與統整報告，就不能假稱完成該流程；不用 NotebookLM 須使用者明確選擇 DIRECT_SYNTHESIS。
-- **證據誠實**：來源狀態用 `VERIFIED_FULL / REPORTED_FULL / PARTIAL / LINK_ONLY / FAILED / DUPLICATE / UNKNOWN`。影片字幕完整不代表看過畫面；未核對示範要標 `VISUAL_UNCHECKED`。任何 AI 二次整理都不能冒充原始作品。
-- **不是所有主題都要搜社群**：程式可先看官方文件；樂器更需要實際演奏畫面；研究個人品牌才可能需要 X／Threads 個案。
-- **隱私、安全與授權**：不公開私人對話、客戶或他人付費教材；醫療、法律、財務、危險操作等不以七天課取代專業判斷。發文、私訊、交易或變更外部資料要另經同意。
-- **尚未證實成效**：目前只是可試用的公開方法，沒有跨人群、跨 AI 工具的完整七天成效證據。
-
-## 想查詳細規則，再打開這些檔案
-
-| 檔案 | 用途 |
-|---|---|
-| **[PROMPT.md](PROMPT.md)** | 完整的 AI 啟動指令與每個停止關卡 |
-| [RESEARCH_METHOD.md](RESEARCH_METHOD.md) | 選來源、判斷可靠性、NotebookLM 接力與停損 |
-| [RESEARCH_PROMPTS.md](RESEARCH_PROMPTS.md) | Gemini／NotebookLM 匯入與統整提示詞、其他研究子任務 |
-| [SOURCE_LOG_TEMPLATE.md](SOURCE_LOG_TEMPLATE.md) | 來源、匯入、主張、限制與 SOURCE_REVIEW 的進階紀錄表 |
-| [METHOD.md](METHOD.md) | 七天實作、批改與學習驗收 |
-| [DAILY_REVIEW.md](DAILY_REVIEW.md) | 本人作品、AI 協助範圍、前後比較 |
-| [HANDOFF.md](HANDOFF.md) | 跨平台或新對話時，保留目前階段與未完成工作 |
-| [ORIGIN.md](ORIGIN.md) | 方法起源與限制 |
-| [SOURCES.md](SOURCES.md) | 公開研究線索 |
-| [CHANGELOG.md](CHANGELOG.md) | 版本修正歷史 |
-| [LICENSE](LICENSE) | MIT：本 Repo 原創內容授權 |
-
-**歡迎試用回報**：可開 [GitHub Issue](https://github.com/guoyutw/7day-ai-learning-loop/issues)，簡單寫「想學的主題、使用哪個 AI、卡在哪一個步驟」即可；不必上傳私人筆記或完整對話。
-
-> 繁體中文為主要版本。公開 v0.2.3 是方法候選，不是經驗證的教學產品。
+試用遇到障礙，可在 [GitHub Issues](https://github.com/guoyutw/7day-ai-learning-loop/issues) 留下主題、使用的 AI 與卡住的步驟；不需要公開自己的對話或筆記。
