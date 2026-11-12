@@ -2,6 +2,10 @@
 
 ## 2026-11-12 — v0.2.3 / beginner-first entry and three-axis evidence clarity (untested)
 
+### v0.2.3 follow-up｜README 不再嵌套另一份 Agent Prompt
+
+修正公開上手流程的重複指令問題：`README.md` 原本提供一段要求 AI 重新讀取 Repo 的短 Prompt，與 `PROMPT.md` 正式啟動提示詞重複。現改為讀者直接進入 `PROMPT.md`、填寫學習主題並複製完整指令。README 只做介紹、導航、接力教學；未改研究流程、任何關卡或授權規則。這是 v0.2.3 內的 UX 修正，未另升版本。
+
 **緣由**：使用者要讓沒有原專案背景的人直接拿公開 Repo 使用；v0.2.2 雖能停在 SOURCE_PACKAGE_READY，README 首屏仍用「AI 先排過課」的假設情境開場、Prompt 很長，且來源讀取標記、方法的可靠性與學習投入容易混成一種判斷。
 
 **研究參考（閱讀原始 Repo README 及相關指南，借鏡原理，不複製其條目／證據評級）**：
