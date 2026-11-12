@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-11-12 — v0.2.1 / Grok Bot review consistency repair (untested)
+
+**來源與性質**：依外部 Grok Bot 在 2026-11-12 提供的文件審查建議修正；Grok 的意見不是 Owner 核准，修改由 Owner 在對話中明確指示。本版本仍未完成真實七天學習或跨模型行為測試。
+
+**三項 Must Fix**：
+- **階段一致**：統一 `R0 定義 → R1 搜尋 → R2 驗收與跨來源比較 → SOURCE_REVIEW → R3 設計七天 → PLAN_REVIEW → R4 Day 1–7`；取消 RESEARCH_METHOD 裡同名但不同義的 R3/R4/R5。
+- **QUICK_MODE 一致**：只有學習者明確提出，才縮減至最多 3 個來源；仍要簡版 SOURCE_REVIEW、等待確認、保留 PLAN_REVIEW 並標明信心較低。不能把未核對資料當已驗證。
+- **來源標籤一致**：統一 `VERIFIED_FULL / REPORTED_FULL / PARTIAL / LINK_ONLY / FAILED / DUPLICATE / UNKNOWN`。沒有本輪實際讀回的全文或完整可用字幕不得標 VERIFIED_FULL；影片需另標視覺證據缺口。
+
+**低成本改善**：補回財務／投資等高風險限制；在 README 說明研究可能跨多次對話、NotebookLM 與其他 AI 工具常需手動匯入與交接；NEED_SOURCES 需學習者同意，最多再補搜兩輪、每輪最多三個新來源；同步更新對外描述。個人研究起源敘述依既有公開內容保留，未新增私人資料。
+
+**仍未知**：真實 AI 是否會遵守兩個停下來的關卡、來源核對品質及完整七天學習成效；文件一致性檢查不等於行為或教學成效實證。
+
 ## 2026-11-12 — v0.2 / Research-first rewrite (public candidate)
 
 **為何改**：最初 v0.1 把使用者原來的跨語言／跨平台研究方法縮成「直接產生七天課表」，遺失完整長影片、社群原始材料、NotebookLM 來源匯入驗收、跨來源證據分級與研究停止關卡。
