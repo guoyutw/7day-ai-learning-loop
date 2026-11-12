@@ -43,7 +43,7 @@ AI 可能會出錯，尤其是需要即時資訊、實際工具、專業資格�
 
 ## 歡迎參與公開試用
 
-這是公開的 **untested v0.1**，作者自己也尚未完成一輪試用。你可以先試，再以 [GitHub Issues](../../issues) 分享：
+這是公開的 **untested v0.1**，作者自己也尚未完成一輪試用。你可以先試，再以 [GitHub Issues](https://github.com/guoyutw/7day-ai-learning-loop/issues) 分享：
 - 想學的主題及每天可投入的時間（無須透露個資）。
 - 哪個步驟好用、哪個地方造成負擔。
 - AI 哪裡給了錯誤建議、如何修正。
