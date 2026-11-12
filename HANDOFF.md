@@ -9,15 +9,20 @@
 
 研究主題與學習者真正的目標：
 現有程度、時間、工具、語言與限制：
-目前階段（R0 定義 / R1 搜尋 / R2 驗收與比較 / SOURCE_REVIEW / R3 計畫 / PLAN_REVIEW / R4 Day 1–7 / 結案）：
+目前階段（R0 定義 / R1 搜尋與來源包 / SOURCE_PACKAGE_READY / R2 INGEST_REVIEW / 等待 SYNTHESIS_REPORT / SOURCE_REVIEW / R3 計畫 / PLAN_REVIEW / R4 Day 1–7 / 結案）：
 模式（STANDARD／QUICK_MODE；QUICK_MODE 必須是學習者明確要求且最多 3 個來源）：
+研究路線（預設 NOTEBOOKLM_FIRST；DIRECT_SYNTHESIS 須使用者明確選擇與記錄）：
 已使用 NEED_SOURCES 補搜輪次（0／1／2，需經學習者同意，最多 2 輪、每輪最多新增 3 個）：
 研究問題與本輪停止條件：
 已找到的來源（ID / 標題 / 原始 URL / 類型 / VERIFIED_FULL、REPORTED_FULL、PARTIAL、LINK_ONLY、FAILED、DUPLICATE、UNKNOWN 之一；本輪是否實際核對、核對者及日期）：
 影片畫面是否檢查（沒看就標 VISUAL_UNCHECKED；完整字幕不等於看過畫面）：
 主要研究結果與反例（每項附可追溯來源）：
 哪些是原始來源、專家方法、本人自述、其他 AI 的二次報告：
-已完成來源匯入與驗收嗎？誰回報、哪天、是否實際讀回：
+SOURCE_PACKAGE_READY 是否完成（YES／NO）？來源包與可複製匯入 Prompt 位置：
+INGEST_RECEIPT 是否已由 NotebookLM／工具實際匯入並讀回？筆記本名稱或連結、逐筆成功／部分／失敗／未知：
+INGEST_REVIEW 是否完成？誰回報、哪天、是否獨立讀回／只是平台回報：
+SYNTHESIS_REPORT 是否已從 NotebookLM 帶回？是否有來源 ID、原始 URL 或可查位置：
+若使用 DIRECT_SYNTHESIS，誰在何時明確選擇？主 AI 實際讀到什麼：
 SOURCE_REVIEW 是否經使用者確認（YES / NO / PENDING）：
 七天計畫是否已設計？版本／預定成果：
 PLAN_REVIEW 是否經使用者確認（YES / NO / PENDING）：
@@ -27,7 +32,7 @@ AI 修改或代做的部分：
 目前缺少的證據、外部結果／敏感資訊限制：
 下次唯一要做的事：
 
-請先核對狀態與當前可讀來源。QUICK_MODE 只縮小研究，仍須簡版 SOURCE_REVIEW、保留 PLAN_REVIEW 並註明較低的證據信心；沒有必要的確認就停在正確關卡，不跳到 Day 1 或宣稱結案。
+請先核對狀態與當前可讀來源。預設 NOTEBOOKLM_FIRST，沒有匯入收據與跨來源報告就不能直接提交正式 SOURCE_REVIEW；遇到來源包時先停下交給我操作。只有我明確選擇 DIRECT_SYNTHESIS 才能跳過 NotebookLM；QUICK_MODE 只是縮小研究、不能略過兩道正式確認。沒有必要的確認就停在正確關卡，不跳到 Day 1 或宣稱結案。
 ```
 
 **保存位置**：可放自己的私有筆記、文件、NotebookLM 摘要或私人聊天。公開 GitHub Issue 不應放私人逐字稿、客戶或家庭資料、帳號識別碼、敏感結果。
