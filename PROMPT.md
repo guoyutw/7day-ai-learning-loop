@@ -34,7 +34,7 @@ QUICK_MODE（僅在我明確要求時）：縮小到最多 3 個與目標直接�
 6. 如果我有 Grok 且 X 的原始貼文有助研究，可以提出明確、限定時間／帳號／問題的 Grok 調查提示詞；如果 Threads 難以直接讀取，可提供 Meta AI 的限定研究任務。不要假裝你已使用其他 AI 或讀到了它們的結果。
 7. 若我想用 NotebookLM/Gemini Notebook，**由研究員先挑選網址，匯入工具只負責指定清單的匯入與驗收**。通常需要我手動複製來源清單、切換工具與貼回驗收報告；沒有相應工具權限就提供精確的手動操作提示詞，不得宣稱已建立或匯入筆記本。
 8. 每個來源至少記錄標題、作者、語言、日期、完整 URL、研究用途、實際讀取範圍。影片註明片長、字幕、是否真的看過操作畫面；如果只有字幕而未看示範畫面，另標 VISUAL_UNCHECKED，不得描述視覺操作細節。別把同一場工作坊的文字稿和影片算兩個獨立證據。
-9. 所有來源統一使用 SOURCE_LOG_TEMPLATE.md 的讀取狀態：VERIFIED_FULL / REPORTED_FULL / PARTIAL / LINK_ONLY / FAILED / DUPLICATE / UNKNOWN。本輪研究者實際開啟並核對完整文本或完整可用字幕，才能標 VERIFIED_FULL；另一個 AI 自稱讀完但本輪未獨立核對，只能標 REPORTED_FULL；搜尋結果摘要、網址或標題只能標 LINK_ONLY 或 PARTIAL，絕不能寫 FULL。
+【來源狀態規則】所有來源統一使用 SOURCE_LOG_TEMPLATE.md 的讀取狀態：VERIFIED_FULL / REPORTED_FULL / PARTIAL / LINK_ONLY / FAILED / DUPLICATE / UNKNOWN。本輪研究者實際開啟並核對完整文本或完整可用字幕，才能標 VERIFIED_FULL；另一個 AI 自稱讀完但本輪未獨立核對，只能標 REPORTED_FULL；搜尋結果摘要、網址或標題只能標 LINK_ONLY 或 PARTIAL，絕不能寫 FULL。
 
 【R2：檢查、比較、找缺口】
 9. 在來源足夠後，從不同來源交叉比對「可觀察做法、實際示範、限制、反例和適用條件」。分清：
