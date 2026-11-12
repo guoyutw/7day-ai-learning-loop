@@ -1,6 +1,6 @@
 # Research-first：從陌生主題到七天陪跑
 
-> 公開方法候選 v0.2.1，尚未經正式學習成效測試。本流程來自「先跨來源調查、再反向工程教材、最後實作」的工作方式；不是一項已獲證明的教育理論。
+> 公開方法候選 v0.2.2，尚未經正式學習成效測試。本流程來自「先跨來源調查、再反向工程教材、最後實作」的工作方式；不是一項已獲證明的教育理論。
 
 ## 目的：研究不是裝飾，而是七天課程的輸入
 
@@ -11,11 +11,15 @@
   ↓
 設計有停止條件的來源搜尋（長影片／完整文章／真實案例／官方文件）
   ↓
-確認每個來源真的讀得到 → 記錄來源類型、品質與限制
+實際核對候選來源、保留完整原始 URL → SOURCE_PACKAGE_READY（停下）
   ↓
-跨來源比較：共同方法、歧見、反例、可觀察示範、缺口
+使用者／授權工具將選定來源匯入 NotebookLM → INGEST_RECEIPT
   ↓
-SOURCE_REVIEW：把來源及缺口交給學習者確認
+主 AI 核對匯入結果 → INGEST_REVIEW（停下，給統整 Prompt）
+  ↓
+NotebookLM 對已匯入來源跨來源比較 → SYNTHESIS_REPORT
+  ↓
+主 AI 核對統整、反例及證據缺口 → SOURCE_REVIEW（使用者確認）
   ↓   （學習者選擇繼續後）
 根據來源設計七天能力地圖與實作驗收
   ↓
@@ -26,9 +30,11 @@ Day 1 → 真實練習 → 回饋 → 重做 → 新題應用 → Day 7 比較
 
 **研究與七天學習是不同階段。** 不要為了看起來「七天」就把尚未做完的搜尋、匯入、驗證說成已完成；也不要在尚未審核來源時直接開始 Day 1。
 
-**QUICK_MODE（僅在我明確要求時）：縮小到最多 3 個與目標直接相關的來源（優先沿用已核對來源），仍須交付含讀取狀態與 UNKNOWN 的簡版 SOURCE_REVIEW 並等我確認；PLAN_REVIEW 也要保留，且註明證據信心較低。不得把未核對資料當成已驗證，不能直接跳到 Day 1。**
+**預設研究路線 NOTEBOOKLM_FIRST**：來源蒐集後必須先交付 `SOURCE_PACKAGE_READY`，使用者手動匯入或讓有權工具匯入 NotebookLM；有 `INGEST_RECEIPT` 才能做 `INGEST_REVIEW` 並交付跨來源統整提示詞；帶回 `SYNTHESIS_REPORT` 後主 AI 才完成 SOURCE_REVIEW。若缺少筆記本或本人不想使用，**須使用者明確選擇 DIRECT_SYNTHESIS**，才改由主 AI 對已可讀來源進行比較，沒有 NotebookLM 收據就寫未使用，不造假。
 
-本文件採用統一階段：R0 定義問題 → R1 搜尋 → R2 驗收並比較來源 → SOURCE_REVIEW（停下來確認）→ R3 設計七天 → PLAN_REVIEW（停下來確認）→ R4 Day 1–7。SOURCE_REVIEW 與 PLAN_REVIEW 是關卡，不另編 R 編號。
+**QUICK_MODE**（只有使用者明確要求）只是將來源縮到最多 3 個、信心較低；仍走來源包與兩道正式確認，走 NOTEBOOKLM_FIRST 時也必須匯入及統整。QUICK_MODE 不等於 DIRECT_SYNTHESIS。
+
+本文件採用統一階段：R0 定義問題 → R1 搜尋與來源包（SOURCE_PACKAGE_READY）→ R2 匯入驗收（INGEST_REVIEW）與 NotebookLM 統整（SYNTHESIS_REPORT）→ SOURCE_REVIEW（停下來確認）→ R3 設計七天 → PLAN_REVIEW（停下來確認）→ R4 Day 1–7。SOURCE_PACKAGE_READY、INGEST_REVIEW、SOURCE_REVIEW 與 PLAN_REVIEW 是停下來交接／核准的關卡，不另編 R 編號。
 
 ## R0｜先限定問題與停止條件
 
@@ -65,9 +71,9 @@ Day 1 → 真實練習 → 回饋 → 重做 → 新題應用 → Day 7 比較
 
 可複製的跨工具任務見 [RESEARCH_PROMPTS.md](RESEARCH_PROMPTS.md)。
 
-## R2｜先驗收來源，不能只計算數量
+## R1 收尾｜來源標記、去重與 SOURCE_PACKAGE_READY
 
-在設計課程前先填 [SOURCE_LOG_TEMPLATE.md](SOURCE_LOG_TEMPLATE.md)。每筆至少有：
+在交付來源包之前，先填 [SOURCE_LOG_TEMPLATE.md](SOURCE_LOG_TEMPLATE.md)。每筆至少有：
 
 `ID、研究問題、題名、作者／發布者、日期、語言、類型、原始 URL、是否可讀、是否完整、影片片長／字幕與畫面缺口、來源等級、適用條件、限制／反證`。
 
@@ -79,13 +85,22 @@ Day 1 → 真實練習 → 回饋 → 重做 → 新題應用 → Day 7 比較
 - 來源「教過某技巧」、教師「曾示範某技巧」、學員「真的做出來」、學員「後來改善」是不同強度的證據。
 - 第三方影片不整份重新公開於 Repo。對話或私有筆記可以用合理權限保存摘錄；公開 Repo 僅保留來源 URL 與自己的簡短說明。
 
-### NotebookLM / Gemini Notebook 實作
+### SOURCE_PACKAGE_READY｜來源包交接
 
-1. 先由研究者**搜尋、篩選、提供固定來源清單**，而不是把「請你去找資料」交給匯入工具。
-2. NotebookLM 往往需要使用者手動建立／開啟筆記本、逐項匯入來源，再將結果貼回原 AI；只有工具實際允許時才可代操作，且需要使用者授權。提供 URL、PDF、Markdown、可公開的筆記與有字幕的影片。
-3. 匯入後讀回來源清單，檢查每筆是否有全文、只有摘要、或影片缺畫面／字幕；記錄報告狀態與實際核對的差距。
-4. 再進行跨來源分析。沒有資料或資料不足時回答 UNKNOWN。
-5. NotebookLM 引用編號通常只在該筆記本內可解析；公開方法與跨對話交接須保留**原始來源 URL／標題／章節時間**。
+搜尋結束後主 AI 先給使用者**實際可執行**的來源包，不得直接交 SOURCE_REVIEW：
+1. 每一筆的 `S01…Sxx`、作者、原始完整 URL、重要性、實際讀取狀態與能否在 NotebookLM 匯入。沒有原始 URL 的來源不得裝成可匯入。
+2. 建議先匯入的互補來源（不必所有來源都成功匯入）；列出去重、缺字幕、部分全文與影片 VISUAL_UNCHECKED。
+3. **完整可複製的 NotebookLM 匯入提示詞**：只匯入選定來源、確認內容與限制，回報 `INGEST_RECEIPT`。
+4. 停下來讓使用者前往工具操作。不能因主 AI 已經能閱讀幾份文章就自行略過這步驟。
+
+## R2｜NotebookLM 匯入驗收與跨來源統整
+
+1. 使用者或具備授權的工具依來源包匯入 NotebookLM；一般情況需要手動建立／開啟筆記本、加入 URL／檔案，再把逐筆結果貼回主 AI。不允許因匯入工具不可用而假稱已完成。
+2. **INGEST_REVIEW**：主 AI 對照 S01～Sxx 與 `INGEST_RECEIPT`，確認匯入成功／部分內容／失敗／未知、可用字幕、子頁及重複項。筆記本成功匯入 ≠ 本輪主 AI 已獨立閱讀全文，更不等於已看見影片畫面。
+3. 確認至少有可比較的有效資料後，主 AI 提供一段**完整可複製的 NotebookLM 跨來源統整提示詞**，要求只比較已實際匯入的來源；在 INGEST_REVIEW 停止，等待使用者帶回結果。沒有足夠資料則先補合法可匯入形式或縮小題目。
+4. NotebookLM 依問題比較相同／衝突的方法、反例、操作技巧、限制，輸出 `SYNTHESIS_REPORT`。對關鍵主張保留來源 ID 與原始 URL／可定位章節；不能把平台自己的引用編號當跨平台可核對的唯一證據。
+5. **主 AI 取得 SYNTHESIS_REPORT 後才提出正式 SOURCE_REVIEW**，先比對統整是否真的有來源支持、是否把同一工作坊算兩個觀點、是否把未看畫面的影片描述寫成示範。
+6. 若使用者已明確選擇 `DIRECT_SYNTHESIS`，主 AI 可直接比較自己實際取得的來源，來源標籤與限制不變，`INGEST_RECEIPT`／`SYNTHESIS_REPORT` 標記未使用（不得冒充已完成）；仍須停在 SOURCE_REVIEW。
 
 ### 跨來源對照（R2 的一部分，不先抄一套課）
 
@@ -106,7 +121,7 @@ Day 1 → 真實練習 → 回饋 → 重做 → 新題應用 → Day 7 比較
 - 支持、相反與缺失的證據；最多三個影響課程的關鍵缺口。
 - 下一個建議：`READY`（足以設計有界練習）／`PARTIAL_READY`（縮小目標）／`NEED_SOURCES`（再有界搜尋）／`STOP`（風險或可靠性不足）。
 
-**到此停止，等學習者決定**是否接受來源或補強後，才進入七天課程設計。不能把「已提供一串連結」當作 SOURCE_REVIEW 完成。
+**到此停止，等學習者決定**是否接受來源或補強後，才進入七天課程設計。在 NOTEBOOKLM_FIRST 路線上，不能把「已提供一串連結」、只拿到 `INGEST_RECEIPT`，或主 AI 自行整理了一篇研究報告，當作 NotebookLM 已完成跨來源統整。
 
 ### 補搜上限與研究停損（R1／R2，非新階段）
 
