@@ -2,6 +2,14 @@
 
 ## Unreleased — Draft：單一入口、按需載入、三條路徑走查
 
+### Draft PR #1 針對審查反例的小修
+
+- 重新補足 QUICK_MODE 必須明確選擇、最多 3 來源、標記證據信心較低，**仍走 NotebookLM-first**；DIRECT_SYNTHESIS 需另外明確選擇。
+- HANDOFF 保存研究問題、已核准 1–3 個方法、七天計畫版本／全文定位；PROMPT 要求每次停止時輸出可貼回的接續狀態。PLAN_REVIEW=PENDING 且已存在課表時，**讀回原稿而不是重做**。
+- 補回會影響行為的界線：只有搜尋摘要不能標 FULL、匯入成功不等於原文完整、NotebookLM 引用應能對回原 URL／章節、Grok／Meta AI 有界檢索、曝光／詢問／付款等不同事件不得互相推論。
+- 維持單一主 Prompt 與四份文件整併；不恢復已刪文件，不代表通過獨立審查或真人端到端測試。
+
+
 - **目的**：讓第一次進來的人迅速知道「免費教材 → NotebookLM 統整 → 七天實作」，單一主動作是開啟 `PROMPT.md`。
 - **去重**：保留 `README.md`（給人）、`PROMPT.md`（唯一 AI 執行指令）、`METHOD.md`（研究及教學細節）、`HANDOFF.md`（跨對話狀態）；移除重複的 `RESEARCH_METHOD.md`、`RESEARCH_PROMPTS.md`、`SOURCE_LOG_TEMPLATE.md`、`DAILY_REVIEW.md`。研究背景、公開來源、版本紀錄與授權保留。
 - **行為不變**：保留 STANDARD／QUICK_MODE、NotebookLM-first／需明確選擇的 DIRECT_SYNTHESIS、來源級別與畫面限制、SOURCE_PACKAGE_READY／INGEST_REVIEW／SYNTHESIS_REPORT、SOURCE_REVIEW／PLAN_REVIEW 人工確認、七天實作及中斷接續。
