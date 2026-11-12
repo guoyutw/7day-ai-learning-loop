@@ -1,6 +1,6 @@
 # 研究分工：跨 AI 工具可複製提示詞
 
-這些是**有條件才使用**的子任務。主導者仍需先設定研究問題與來源停止條件，並記錄原始來源。工具不能存取或使用者沒有帳號時，請用人工取得材料，不假裝自動執行。常見流程需要使用者跨好幾次對話手動貼來源與回報；這段研究時間不計入七天實作。
+這些是**有條件才使用**的子任務。研究主線預設為 NOTEBOOKLM_FIRST：主 AI 先交 SOURCE_PACKAGE_READY，再透過本檔第 4、5 節人工接力，最後才產生 SOURCE_REVIEW。主導者仍需先設定研究問題與來源停止條件，並記錄原始來源。工具不能存取或使用者沒有帳號時，請用人工取得材料，不假裝自動執行。常見流程需要使用者跨好幾次對話手動貼來源與回報；這段研究時間不計入七天實作。
 
 各子任務一律採用 [SOURCE_LOG_TEMPLATE.md](SOURCE_LOG_TEMPLATE.md) 的讀取狀態：`VERIFIED_FULL / REPORTED_FULL / PARTIAL / LINK_ONLY / FAILED / DUPLICATE / UNKNOWN`；影片另外註明 `VISUAL_UNCHECKED`。第一次研究判定 NEED_SOURCES 且使用者同意時，最多再補搜 2 輪、每輪最多新增 3 個針對缺口的來源；仍不足就縮小題目或 STOP。QUICK_MODE 只在使用者明確要求時啟用，最多 3 個來源、仍需簡版 SOURCE_REVIEW 和 PLAN_REVIEW。
 
@@ -66,44 +66,69 @@ D. 在本地語言之外，必要時補英文、日文或其他與該主題相�
 本次不設計課程。
 ```
 
-## 4｜給 Gemini／NotebookLM：只匯入指定來源
+## 4｜給 Gemini／NotebookLM 的匯入任務（SOURCE_PACKAGE_READY 後）
+
+> 將主 AI 產出的完整 SOURCE_PACKAGE（每項 ID、標題、原始 URL、類型、讀取狀態）貼在下方。這段**只能做匯入與驗收**，不要一次請 AI 搜尋、匯入、統整、排課。
 
 ```text
-請使用【筆記本名稱；無則建立新筆記本】。
-這輪只匯入以下已由研究者挑選好的來源，不要自行搜尋或新增其他網址：
+我正在進行 Research-first 七天 AI 學習（v0.2.2），目前只要 NotebookLM 來源匯入與 INGEST_RECEIPT。
 
-【在此貼上來源清單，附 ID、標題、URL；AI 二次報告另附全文或檔案】
+研究主題：【主題】
+筆記本：【既有筆記本名稱／若沒有則新建】
+本輪固定的來源清單（只能使用這些來源，不另搜尋）：
+【貼上含 S01～Sxx、原始 URL、作者與前輪實際讀取狀態的 SOURCE_PACKAGE】
 
-逐個匯入，原始來源與 AI 摘要要分成不同項。對每筆回報：
-ID／標題／原始網址／實際取得內容／VERIFIED_FULL 或 REPORTED_FULL 或 PARTIAL 或 LINK_ONLY 或 FAILED 或 DUPLICATE 或 UNKNOWN；
-對 YouTube 註明字幕是否可用、視覺資訊是否缺失（未實際看畫面註明 VISUAL_UNCHECKED）；對網站註明是否只有首頁／是否無法讀子頁。本輪實際核對完整內容才標 VERIFIED_FULL；只是其他 AI 回報可取得全文而未獨立核對，標 REPORTED_FULL；只有標題／網址／搜尋摘要不能標全文。
+你若有實際的 NotebookLM 操作能力及授權，請逐筆加入來源；若無法操作，不得宣稱匯入成功，請改提供我能在 NotebookLM 介面手動完成的步驟。
+請依來源 ID 標示每筆筆記本中的名稱，方便回查。
+匯入後讀回筆記本來源清單，逐項回報：
+- Sxx／原始 URL／筆記本來源名稱／是否真的出現在筆記本中
+- 筆記本可處理的是完整文本、部分文本、字幕、網址摘要，還是 UNKNOWN
+- 原始頁面子頁、PDF 圖表、影片字幕、影片實際示範畫面的缺失
+- 相同作品重複匯入、AI 二次研究與原始來源有無混用
 
-匯入完成後，請只回報來源驗收表、失敗清單與筆記本連結。不要開始比較來源或產生課程。
-無法實際建立／匯入時要明說，不得假稱成功。
+請輸出 INGEST_RECEIPT 表：ID | 原始 URL | 筆記本來源名稱 | 匯入成功／部分／失敗／未知 | 平台實際可見內容 | 缺口 | 核對方式。
+明確區分「NotebookLM 接受匯入」和「你已核對原文完整性」；只靠匯入成功不得自動變成 VERIFIED_FULL。
+若實際無法確認，標 UNKNOWN 或 REPORTED_FULL，不編造。
+完成 INGEST_RECEIPT 後立即停止。不要在這一步做跨來源結論，更不要產生七天課表。
 ```
 
-## 5｜給 NotebookLM：在來源驗收後進行跨來源比較
+**交接操作**：把這個 INGEST_RECEIPT 帶回主 AI，讓主 AI 完成 INGEST_REVIEW。不要只回「都匯入了」而沒有來源清單和狀態。
+
+## 5｜給 NotebookLM 的跨來源統整（INGEST_REVIEW 後）
+
+> 只能在主 AI 確認已有足夠的可用匯入來源，並交付這份統整提示詞後執行。
 
 ```text
-請只使用這個筆記本已成功匯入的來源。
-研究問題：【最多 3–5 題】
-用途：準備設計【主題】的七天動手做課程，但現在只研究方法、不設計課程。
+你是 Research-first 七天 AI 學習的跨來源研究員。這次只使用**這個 NotebookLM 筆記本中已經成功匯入的來源**，不得把搜尋摘要或未匯入的候選資料當成本輪已讀證據。
 
-請輸出：
-A. 不同來源的做法與實際證據比較表（每項附原始來源或可定位的引用）
-B. 有哪些可觀察示範、哪些只是講師自述／成功個案／AI 摘要
-C. 3–7 個能被初學者重做的候選方法，以及適用條件與反例
-D. 重大未知、失敗條件、重複內容與來源缺口
-E. 可否進入設計：READY / PARTIAL_READY / NEED_SOURCES / STOP，及理由
+研究主題：【主題】
+研究問題：【最多五題】
+原始來源對照表（ID、標題、URL、缺口）：
+【貼上主 AI 驗收後的來源對照表】
 
-不能把同一個工作坊的逐字稿與影片算成兩個獨立支持；沒有原始影片畫面不得聲稱看過示範；找不到顧客付款等私有數據不能補猜。
-完成後停止，讓學習者審核來源與方法。
+請逐題輸出：
+A. 各來源實際說了／示範了什麼，標示 Sxx、來源引用和可回查的位置；若原始 URL 無法在筆記本查明，保留 UNKNOWN，不自創連結。
+B. 哪些觀點互相支持、哪些不同或衝突、哪些只是作者本人自述或其他 AI 的二次整理。
+C. 如何把它們變成 3～7 個初學者可重做的技能／行動候選，每個候選附來源 ID、適用條件、可交付成果、可能失敗的原因。
+D. 主要反例、成功者偏差、地區／工具／年份差異、沒有來源的主張及重要 UNKNOWN。
+E. 對文字、圖表和影片證據的限制：字幕完整 ≠ 已檢查示範畫面；若來源影片畫面未檢視，標 VISUAL_UNCHECKED。
+F. 目前的資料足以支持什麼有限的練習？仍需補哪些有界來源？
+
+保留同一作品不同版本的去重關係。不要將筆記本引用編號視作原始公開網址；必要時提供來源名稱加可定位章節。
+最後將成果命名為 SYNTHESIS_REPORT，寫明本輪來源範圍與主要 UNKNOWN。
+**完成就停止：不得設計七天課表、不得擅自宣告主 AI 已完成 SOURCE_REVIEW，也不得開始 Day 1。**
 ```
 
-## 6｜當研究已通過來源審核：設計七天陪跑
+**交接操作**：把 SYNTHESIS_REPORT 貼回主 AI。主 AI 再對照原 SOURCE_PACKAGE、INGEST_RECEIPT，提出正式 SOURCE_REVIEW，等待學習者確認。
 
-使用 [PROMPT.md](PROMPT.md) 主 Prompt 的 PLAN_REVIEW、每日練習與 Day 7 驗收。**不要在研究子任務內搶先設計。**
+## 6｜缺少 NotebookLM 時的例外
+
+預設路線為 NOTEBOOKLM_FIRST。若 NotebookLM 不能用，**主 AI 只能提出選項，不能自行切換**。使用者明確回覆「選擇 DIRECT_SYNTHESIS」後，主 AI 才依實際可讀來源直接統整，保留來源等級、UNKNOWN、反例，並在正式 SOURCE_REVIEW 註明「NotebookLM 未使用」與資料限制。QUICK_MODE 只是縮小來源量，不等於這個例外。
+
+## 7｜當研究已通過來源審核：設計七天陪跑
+
+取得使用者對 SOURCE_REVIEW 的明確確認後，才使用 [PROMPT.md](PROMPT.md) 主 Prompt 的 R3、PLAN_REVIEW、R4。沒有確認不能直接 Day 1。
 
 ## 狀態移交的最低欄位
 
-每次換工具保留：主題、研究問題、來源 ID 與 URL、實際讀取狀態（使用完整七種標籤）、本輪補搜次數／QUICK_MODE、影片 VISUAL_UNCHECKED、重複與反例、已完成的 SOURCE_REVIEW 與 PLAN_REVIEW（或 PENDING）、目前唯一下一步。參見 [HANDOFF.md](HANDOFF.md)。
+每次換工具保留：研究主題、研究問題、模式 STANDARD／QUICK_MODE、路線 NOTEBOOKLM_FIRST／已明確選擇 DIRECT_SYNTHESIS、來源 ID 與原始 URL、來源實際讀取狀態、SOURCE_PACKAGE_READY、INGEST_RECEIPT、INGEST_REVIEW、SYNTHESIS_REPORT、SOURCE_REVIEW、PLAN_REVIEW 的完成或 PENDING、已用補搜輪數、視覺缺口、現在唯一下一步。參見 [HANDOFF.md](HANDOFF.md)。
