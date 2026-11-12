@@ -6,25 +6,15 @@
 
 ## 從這裡開始
 
-**只做一件事：選一項你想學的技能，複製下面這段到你常用的 AI。** 不必會寫程式，也不用先讀完整個 Repo。
+**開啟 [PROMPT.md｜完整啟動提示詞](PROMPT.md)**
 
-```text
-我想用這套公開方法，讓 AI 陪我學習：
-https://github.com/guoyutw/7day-ai-learning-loop
+1. 將其中「學習主題」填成你想學的事，例如「用手機剪一支 30 秒料理影片」。
+2. 其他欄位知道就填，不知道可以留白。把 `PROMPT.md` 裡的**完整提示詞**複製到 ChatGPT、Gemini、Claude 等有搜尋能力的 AI。
+3. AI 會先找免費教材，產生可匯入 NotebookLM 的來源包，**停在 `SOURCE_PACKAGE_READY`**；收到後再依下表進行下一步。
 
-我想學：【填入主題，例如用手機剪一支 30 秒影片】
-我目前的程度：【初學者／已有一點基礎】
-每天可投入：【例如 30 分鐘】
+不用會寫程式，也不用事先讀完所有研究文件。若某個 AI 無法打開 GitHub，**直接貼上 `PROMPT.md` 的完整內容**，比請它憑網址猜測規則更可靠。
 
-請讀取 main 分支最新的 PROMPT.md、RESEARCH_METHOD.md、
-RESEARCH_PROMPTS.md、SOURCE_LOG_TEMPLATE.md，遵守目前版本的完整流程。
-使用 STANDARD + NOTEBOOKLM_FIRST，先搜尋、篩選跨語言免費教材，
-給我含原始網址的 SOURCE_PACKAGE_READY 和可直接複製的 NotebookLM 匯入提示詞，
-然後停止，等我實際匯入後再接續。不要現在就排七天課表。
-若無法讀取 GitHub 文件，請明說需要我貼上哪份文件，不要假裝已讀。
-```
-
-> **AI 讀不到 GitHub？** 打開 [完整主提示詞 PROMPT.md](PROMPT.md)，複製整段貼給 AI，再補上你想學的主題即可。不要讓它憑空假裝讀過 Repo。
+**文件分工**：本 `README.md` 是給讀者的介紹與使用導航，不是第二份 AI 指令；`PROMPT.md` 才是唯一的完整啟動提示詞。研究細節與後續接力提示詞則放在各自的文件中。
 
 ## AI 第一次回覆後，你要做什麼？
 
